@@ -1,0 +1,15 @@
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+drop table if exists weather_partitioned;
+
+create table weather_partitioned (station_name string, dayofmonth int,
+precipitation int, temperature_max int, temperature_min int) 
+partitioned by (year int, month int)
+stored as orc;
+
+
+insert into table weather_partitioned 
+partition (year=2008, month=1) 
+select station_name, dayofmonth, precipitation, temperature_max, temperature_min 
+from sfo_weather
+where year = 2008 and month = 1;

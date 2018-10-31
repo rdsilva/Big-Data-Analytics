@@ -1,0 +1,18 @@
+SET hive.execution.engine= tez;
+
+create table flights_weather
+row format delimited fields terminated by ','
+stored as textfile as
+select 
+	fl.*,
+	sfo.temperature_max,
+	sfo.temperature_min
+from flightdelays as fl 
+join sfo_weather as sfo on (
+	sfo.year = fl.year and
+	sfo.month = fl.month and
+	sfo.dayofmonth = fl.dayofmonth )
+where 
+	fl.dest = 'SFO' or
+	fl.origin = 'SFO';
+

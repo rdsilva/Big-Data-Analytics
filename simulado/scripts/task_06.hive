@@ -1,0 +1,10 @@
+select avg(arrdelay) as media_atraso from flightdelays where dest = 'DEN';
+
+select avg(arrdelay) as media_atraso from flightdelays 
+where origin = 'LAX' and dest = 'SFO';
+
+select dest, avg(arrdelay) as media_atraso from flightdelays 
+group by dest 
+order by media_atraso desc;
+
+

@@ -1,0 +1,5 @@
+drop table if exists flightdelays;
+
+create external table flightdelays (year int, month int, dayofmonth int, deptime int, uniquecarrier string, 
+flightnum int, arrdelay int, origin string, dest string) row format delimited fields terminated by '\;' 
+location '/user/maria_dev/simulado/task_02/flight_delays_cleaned';

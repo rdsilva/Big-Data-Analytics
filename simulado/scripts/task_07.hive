@@ -1,0 +1,10 @@
+drop table if exists temp_task_07;
+
+create external table temp_task_07 (station_name string, year int, month int, dayofmonth int, 
+precipitation int, temperature_max int, temperature_min int) row format delimited fields 
+terminated by ',' location '/user/maria_dev/simulado/weather/';
+
+create table sfo_weather (station_name string, year int, month int, dayofmonth int,
+precipitation int, temperature_max int, temperature_min int) stored as orc;
+
+insert into table sfo_weather select * from temp_task_07;
